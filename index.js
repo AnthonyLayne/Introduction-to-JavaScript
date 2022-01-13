@@ -19,9 +19,11 @@ Do the following:
 
    HINT: no function required
 */
-let votingAge = 34;
+const votingAge = 18;
 if (votingAge >= 18) {
   console.log(true);
+} else {
+  console.log(false);
 }
 
 /*
@@ -74,11 +76,11 @@ Do the following:
  2. Use the received value to calculate the age in dog years (1 human year is equal to 7 dog years)
  3. Return the newly calculated age
 */
-let DOG_TO_HUMAN = 7;
-function dogYears(humanYears) {
-  return humanYears * DOG_TO_HUMAN;
+
+function dogYears(age) {
+  return age * 7;
 }
-console.log(dogYears(3));
+console.log(dogYears(34));
 /*🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀 Task 3 🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀*/
 
 //Dog feeder - Depending on their weight and age, we need to know how many pounds of food to feed our dog each day!
@@ -107,28 +109,25 @@ NOTE: If done correctly, a weight of 15 lbs and age of 1 year would return 0.449
 */
 
 function hungryDog(weight, age) {
-  const basedOnWeight = age >= 1;
-
-  if (basedOnWeight) {
-    if (weight > 15) {
-      return weight * 0.02;
-    } else if (weight >= 11) {
-      return weight * 0.03;
-    } else if (weight >= 6) {
-      return weight * 0.04;
-    } else {
-      return weight * 0.05;
-    }
+  if (age >= 1 && weight <= 5) {
+    return weight * 0.05;
+  } else if (age >= 1 && weight >= 6 && weight <= 10) {
+    return weight * 0.04;
+  } else if (age >= 1 && weight >= 11 && weight <= 15) {
+    return weight * 0.03;
+  } else if (age >= 1 && weight > 15) {
+    return weight * 0.02;
+  } else if (age < 1 && age >= 0.583) {
+    return weight * 0.04;
+  } else if (age < 0.583 && age >= 0.333) {
+    return weight * 0.05;
+  } else if (age < 0.333) {
+    return weight * 0.1;
   } else {
-    if (age >= 0.17 && age <= 0.33) {
-      return weight * 0.1;
-    } else if (age >= 0.33 && age <= 0.58) {
-      return weight * 0.05;
-    } else {
-      return weight * 0.04;
-    }
+    return "try again";
   }
 }
+console.log(hungryDog(15, 2));
 
 /*🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀 Task 4 🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀*/
 
@@ -152,34 +151,28 @@ RULES OF THE GAME: Scissors beats Paper | Paper beats Rock | Rock beats Scissors
 
 HINT: Remember that the order in which we pass in our arguments matters when it comes to parameters
 */
+let computer = Math.random();
+if (computer <= 0.34) {
+  computer = "rock";
+} else if (computer <= 0.67) {
+  computer = "paper";
+} else if (computer > 0.67) {
+  computer = "scissors";
+}
 function game(user, computer) {
-  const paper = "paper";
-  const rock = "rock";
-  const scissors = "scissors";
-  if (user === paper) {
-    if (computer === paper) {
-      return "it's a tie";
-    } else if (computer === rock) {
-      return "you win!";
-    } else return "you lose!";
-  }
-  if (user === rock) {
-    if (computer === rock) {
-      return "it's a tie";
-    } else if (computer === paper) {
-      return "you lose!";
-    } else return "you win!";
-  }
-  if (user === scissors) {
-    if (computer === scissors) {
-      return "it's a tie";
-    } else if (computer === paper) {
-      return "you win!";
-    } else return "you lose!";
+  if (user === computer) {
+    return `it's a tie`;
+  } else if (user === "rock" && computer === "scissors") {
+    return `you win!`;
+  } else if (user === "paper" && computer === "rock") {
+    return `you win!`;
+  } else if (user === "scissors" && computer === "paper") {
+    return `you win!`;
+  } else {
+    return `you lose!`;
   }
 }
-const computer = Math.round(Math.random() * 3);
-console.log(game(1, computer));
+console.log(game("paper", computer));
 /*🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀 Task 5 🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀*/
 
 //Metric Converter
@@ -190,11 +183,11 @@ Using the miles function below do the following:
 2. Convert the number of kiolmeters received to miles
 3. Return the number of miles
 */
-const KM_2_MILES_CONVERT = 0.621371;
-function miles(km) {
-  return km * KM_2_MILES_CONVERT;
-}
 
+function miles(km) {
+  return km * 0.621371;
+}
+console.log(miles(4));
 //Task 5b - Feet to CM
 /*
 Using the feet function below do the following:
@@ -202,10 +195,8 @@ Using the feet function below do the following:
 2. Convert the number of cm to feet
 3. Return number of feet
 */
-
-const CM_2_FEET_CONVERT = 0.0328084;
 function feet(cm) {
-  return cm * CM_2_FEET_CONVERT;
+  return cm / 30.48;
 }
 console.log(feet(9));
 /*🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀 Task 6 🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀*/
@@ -219,11 +210,13 @@ Using the annoyingSong function below do the following:
 */
 
 function annoyingSong(number) {
-  return `${number} bottles of soda on the wall, ${number} bottles of soda, take one down pass it around ${
-    number - 1
-  } bottles of soda on the wall`;
+  for (let i = number; i > 0; i--) {
+    return `${i} bottles of soda on the wall, ${i} bottles of soda, take one down pass it around ${
+      i - 1
+    } bottles of soda on the wall`;
+  }
 }
-
+console.log(annoyingSong(5));
 /*🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀 Task 7 🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀*/
 
 //Grade Calculator
@@ -239,13 +232,20 @@ Using the grade function below do the following:
  below should return 'you got an F'
 */
 
-function grade(score) {
-  if (score <= 100 && score >= 90) return "you got an A";
-  if (score <= 80 && score >= 89) return "you got an B";
-  if (score <= 70 && score >= 79) return "you got an C";
-  if (score <= 60 && score >= 69) return "you got an D";
-  return "you got an F";
+function grade(number) {
+  if (number >= 90) {
+    return `you got an A`;
+  } else if (number < 90 && number >= 80) {
+    return `you got a B`;
+  } else if (number < 80 && number >= 70) {
+    return `you got a C`;
+  } else if (number < 70 && number >= 60) {
+    return `you got a D`;
+  } else if (number < 60) {
+    return `you got an F`;
+  }
 }
+console.log(grade(95));
 
 /*💪💪💪💪💪💪💪💪💪💪 Stretch 💪💪💪💪💪💪💪💪💪💪*/
 
